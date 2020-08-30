@@ -5,7 +5,7 @@ namespace ServerApi.Dtos
 {
     public class CreateSensorReadDto
     {
-        public float TemperatureValue {get; set;}     
-        public int HumidityValue {get; set;}     
+        public float TemperatureValue { get; set; }     
+        public int HumidityValue { get; set; }     
     }
 } 

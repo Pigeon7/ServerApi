@@ -4,8 +4,10 @@ using ServerApi.Data;
 using ServerApi.Dtos;
 using ServerApi.Models;
 using ServerApi.Services;
+using ServerApi.Services.Temperature;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServerApi.Controllers
 {
@@ -13,24 +15,24 @@ namespace ServerApi.Controllers
     [ApiController]
     public class TemperatureController : ControllerBase
     {
-        private readonly IDataOutgoingService dataOutgoingService;
+        private readonly ITemperatureService temperatureService;
 
-        public TemperatureController(IDataOutgoingService dataOutGoingService) 
+        public TemperatureController(ITemperatureService temperatureService) 
         {
-            dataOutgoingService = dataOutGoingService;
+            this.temperatureService = temperatureService;
         }
 
         [HttpGet]
-        public ActionResult<TemperatureResponseDto> GetAllTemperatures()
+        public async Task<ActionResult<TemperatureResponseDto>> GetAllTemperatures()
         {
-            var temperaturesList = dataOutgoingService.ReadTemperatures();
+            var temperaturesList = await temperatureService.ReadAllTemperatures();
             return Ok(temperaturesList);
         }
 
         [HttpGet("{id}")]
-        public ActionResult <TemperatureResponseItemDto> GetTemperatureById(int id)
+        public async Task<ActionResult<TemperatureResponseItemDto>> GetTemperatureById(int id)
         {
-            var temperatureItem = dataOutgoingService.ReadTemperatureById(id);
+            var temperatureItem = await temperatureService.ReadTemperatureById(id);
             if (temperatureItem != null)
             {
                 return Ok(temperatureItem);

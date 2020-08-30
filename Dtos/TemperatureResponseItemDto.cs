@@ -5,10 +5,10 @@ namespace ServerApi.Dtos
 {
     public class TemperatureResponseItemDto
     {
-        public int Id {get; set;}     
+        public int Id { get; set; }     
 
-        public float TemperatureValue {get; set;}     
+        public float TemperatureValue { get; set; }     
         
-        public long ReadTimeMilis {get; set;}     
+        public long ReadTimeMilis { get; set; }     
     }
 } 
