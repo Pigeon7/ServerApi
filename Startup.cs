@@ -24,15 +24,15 @@ namespace ServerApi
         public void ConfigureServices(IServiceCollection services)
         {
             var str = Configuration.GetConnectionString("ServerApiConnection");
-            services.AddDbContext<RaspStorageContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ServerApiConnection")));
+            services.AddDbContext<DbStorageContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ServerApiConnection")));
 
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ISensorsReadRepo, SqlTemperatureRepo>();
-            services.AddScoped<IDataIncomingService, IncomingDataService>();
-            services.AddScoped<IDataOutgoingService, OutgoingDataService>();
+            services.AddScoped<ISensorsReadRepo, SensorsReadRepo>();
+            services.AddScoped<ISensorsReadingService, SensorsReadingService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +53,7 @@ namespace ServerApi
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

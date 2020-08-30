@@ -4,8 +4,10 @@ using ServerApi.Data;
 using ServerApi.Dtos;
 using ServerApi.Models;
 using ServerApi.Services;
+using ServerApi.Services.Humidity;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServerApi.Controllers
 {
@@ -13,43 +15,28 @@ namespace ServerApi.Controllers
     [ApiController]
     public class HumidityController : ControllerBase
     {
-        private readonly IDataOutgoingService dataOutgoingService;
-        public HumidityController(IDataOutgoingService dataOutgoingService) 
+        private readonly IHumidityService humidityService;
+        public HumidityController(IHumidityService humidityService) 
         {
-            this.dataOutgoingService = dataOutgoingService;
+            this.humidityService = humidityService;
         }
         
         [HttpGet]
-        public ActionResult <IEnumerable<HumidReadDto>> GetAllHumidities()
+        public async Task<ActionResult<HumidityResponseDto>> GetAllHumidities()
         {
-            try
-            {
-                var sensorReadingList = dataOutgoingService.ReadHumidities();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var humiditiesList = await humidityService.ReadAllHumidities();
+            return Ok(humiditiesList);
         }
          
         [HttpGet("{id}")]
-        public ActionResult <HumidReadDto> GetHumidById(int id)
+        public async Task<ActionResult<HumidityResponseItemDto>> GetHumidById(int id)
         {
-            try 
+            var humidityItem = await humidityService.ReadHumidityById(id);
+            if (humidityItem != null)
             {
-                var humidityItem = dataOutgoingService.ReadHumidityById(id);
-                if (humidityItem != null)
-                {
-                    return Ok(humidityItem);
-                }
-                return NoContent();
-            } 
-            catch (Exception ex) 
-            {
-                return BadRequest(ex.ToString());
+                return Ok(humidityItem);
             }
-
+            return NoContent();
         }
     }
 

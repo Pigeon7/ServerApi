@@ -8,7 +8,7 @@ using ServerApi.Data;
 
 namespace ServerApi.Migrations
 {
-    [DbContext(typeof(RaspStorageContext))]
+    [DbContext(typeof(DbStorageContext))]
     [Migration("20200719211307_InitialMigration")]
     partial class InitialMigration
     {

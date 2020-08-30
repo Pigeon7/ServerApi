@@ -7,7 +7,7 @@ using ServerApi.Data;
 
 namespace ServerApi.Migrations
 {
-    [DbContext(typeof(RaspStorageContext))]
+    [DbContext(typeof(DbStorageContext))]
     partial class RaspStorageContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

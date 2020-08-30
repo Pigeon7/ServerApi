@@ -8,9 +8,9 @@ namespace ServerApi.Profiles
     {
         public SensorsReadEntitiesProfile() 
         {
-            CreateMap<SensorsReadEntity, TempReadDto>();
-            CreateMap<SensorsReadEntity, HumidReadDto>();
-            CreateMap<CreateSensorReadDto, SensorsReadEntity>();
+            CreateMap<SensorsReadingEntity, TemperatureResponseItemDto>();
+            CreateMap<SensorsReadingEntity, HumidityResponseItemDto>();
+            CreateMap<CreateSensorReadDto, SensorsReadingEntity>();
         } 
     }
 
