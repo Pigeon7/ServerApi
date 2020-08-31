@@ -28,18 +28,18 @@ public class SensorsReadRepo : ISensorsReadRepo
                                         .ToUniversalTime()
                                         .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
                                         .TotalMilliseconds;
-            context.SensorsReadings.Add(sensorReads);
+            context.SensorsReadEntities.Add(sensorReads);
             return context.SaveChangesAsync();
         }
 
         public Task<List<SensorsReadingEntity>> GetSensorReadingEntities()
         {
-            return context.SensorsReadings.ToListAsync();
+            return context.SensorsReadEntities.ToListAsync();
         }
 
         public Task<SensorsReadingEntity> GetSensorReadingEntityById(int id)
         {
-            return context.SensorsReadings.FirstOrDefaultAsync(e => e.Id == id);
+            return context.SensorsReadEntities.FirstOrDefaultAsync(e => e.Id == id);
         }
     }
 

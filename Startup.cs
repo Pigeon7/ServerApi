@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServerApi.Data;
 using ServerApi.Services;
+using ServerApi.Services.Humidity;
+using ServerApi.Services.Temperature;
 
 namespace ServerApi
 {
@@ -32,6 +34,8 @@ namespace ServerApi
 
             services.AddScoped<ISensorsReadRepo, SensorsReadRepo>();
             services.AddScoped<ISensorsReadingService, SensorsReadingService>();
+            services.AddScoped<IHumidityService, HumidityService>();
+            services.AddScoped<ITemperatureService, TemperatureService>();
 
         }
 
@@ -43,7 +47,7 @@ namespace ServerApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

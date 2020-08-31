@@ -22,7 +22,7 @@ namespace ServerApi.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult <SensorsReadingEntity>> CreateSensorsReadEntity(CreateSensorReadDto dtoEntity)
+        public async Task<ActionResult> CreateSensorsReadEntity(CreateSensorReadDto dtoEntity)
         {
             await sensorsReadingService.ReceiveSensorData(dtoEntity);
             return Ok();
